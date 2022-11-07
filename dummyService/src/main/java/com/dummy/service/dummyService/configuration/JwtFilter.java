@@ -1,10 +1,6 @@
 package com.dummy.service.dummyService.configuration;
 
 import com.dummy.service.dummyService.controller.AuthenticationConsumer;
-import com.dummy.service.dummyService.controller.ConsumerController;
-import com.dummy.service.dummyService.model.User;
-import com.netflix.discovery.converters.Auto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -21,12 +17,9 @@ public class JwtFilter extends GenericFilterBean {
 
     private AuthenticationConsumer tokenConsumerService;
 
-    private ConsumerController controller;
-
-    public JwtFilter(AuthenticationConsumer tokenConsumerService,
-                     ConsumerController controller){
+    public JwtFilter(AuthenticationConsumer tokenConsumerService
+    ){
         this.tokenConsumerService = tokenConsumerService;
-        this.controller = controller;
     }
 
 
@@ -48,7 +41,7 @@ public class JwtFilter extends GenericFilterBean {
             filterChain.doFilter(req,res);
         }
         else{
-            String userId = controller.getUserIdFromToken(token);
+            String userId = tokenConsumerService.getUserIdFromToken(token);
             System.out.println(userId+"----------------------------------------------------------");
             httpServletRequest.setAttribute("userId",userId);
             filterChain.doFilter(req,res);

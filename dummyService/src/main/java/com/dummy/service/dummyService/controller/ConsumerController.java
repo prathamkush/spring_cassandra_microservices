@@ -25,8 +25,6 @@ public class ConsumerController {
     EmployeeConsumer employeeConsumer;
 
 
-
-
     @GetMapping("/get-users")
     List<User> getUsers(){
         System.out.println(restConsumer.getClass().getSimpleName());
@@ -66,13 +64,6 @@ public class ConsumerController {
     String createToken(@PathVariable("id") int id){
         return authenticationConsumer.createToken(id);
     }
-
-    //@GetMapping("/get-userId-from-token/{token}")
-    public String getUserIdFromToken(String token){
-        return authenticationConsumer.getUserIdFromToken(token);
-    }
-
-
 
     @PostMapping("/employee/add-employee")
     ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
