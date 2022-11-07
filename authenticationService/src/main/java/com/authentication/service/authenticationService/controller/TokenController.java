@@ -22,4 +22,8 @@ public class TokenController {
         return tokenService.createToken(userId);
     }
 
+    @GetMapping("/get-userId-from-token/{token}")
+    public String getUserIdFromToken(@PathVariable("token") String token){
+        return tokenService.getUserIdFromToken(token);
+    }
 }
